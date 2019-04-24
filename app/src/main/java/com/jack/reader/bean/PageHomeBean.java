@@ -65,12 +65,21 @@ public class PageHomeBean {
             private String summary;
             private String author;
             private String book_typeid;
+            private String book_typename;
             private String status;
             private String readcount;
             private String created;
             private String uptime;
             private String content_secr;
             private String coverimg;
+
+            public String getBook_typename() {
+                return book_typename;
+            }
+
+            public void setBook_typename(String book_typename) {
+                this.book_typename = book_typename;
+            }
 
             public String getId() {
                 return id;

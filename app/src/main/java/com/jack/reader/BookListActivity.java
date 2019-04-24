@@ -90,7 +90,7 @@ public class BookListActivity extends BaseRVActivity<PageHomeBean.PageHomeData.P
         ReadActivity.startActivity(mContext,
                 new Recommend.RecommendBooks(mAdapter.getItem(position).getId(), mAdapter.getItem(position).getTitle(),
                         mAdapter.getItem(position).getCoverimg(), mAdapter.getItem(position).getSummary(),
-                        mAdapter.getItem(position).getAuthor(), mAdapter.getItem(position).getBook_typeid(),
+                        mAdapter.getItem(position).getAuthor(), mAdapter.getItem(position).getBook_typename(),
                         mAdapter.getItem(position).getStatus(), false));
     }
 

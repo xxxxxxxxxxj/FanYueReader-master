@@ -72,7 +72,6 @@ public class DownloadBookService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        EventBus.getDefault().register(this);
         LoggingInterceptor logging = new LoggingInterceptor(new Logger());
         logging.setLevel(LoggingInterceptor.Level.BODY);
         bookApi = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
@@ -85,6 +84,16 @@ public class DownloadBookService extends Service {
     }
 
     @Override
+    public void onStart(Intent intent, int startId) {
+        super.onStart(intent, startId);
+        if (!EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().register(this);
+        }
+        DownloadQueue downloadQueue = (DownloadQueue) intent.getSerializableExtra("downloadQueue");
+        post(downloadQueue);
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
     }
@@ -93,7 +102,9 @@ public class DownloadBookService extends Service {
     public void onDestroy() {
         super.onDestroy();
         unSubscribe();
-        EventBus.getDefault().unregister(this);
+        if (EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     public static void post(DownloadQueue downloadQueue) {

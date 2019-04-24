@@ -24,6 +24,7 @@ import com.jack.reader.bean.BooksByCats;
 import com.jack.reader.bean.ClassIndexBean;
 import com.jack.reader.bean.PageHomeBean;
 import com.jack.reader.bean.RankListBean;
+import com.jack.reader.bean.RefershFranmentEvent;
 import com.jack.reader.component.AppComponent;
 import com.jack.reader.component.DaggerFindComponent;
 import com.jack.reader.ui.activity.SerchBookActivity;
@@ -38,6 +39,10 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,8 +78,18 @@ public class ClassifyFragment extends BaseRVFragment<BookrackPresenter, ClassInd
     //声明mLocationOption对象
     private AMapLocationClientOption mLocationOption;
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(RefershFranmentEvent event) {
+        if (event != null && event.getPosition() == 1) {
+            onRefresh();
+        }
+    }
+
     @Override
     public void initDatas() {
+        if (!EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().register(this);
+        }
         image_serch.setVisibility(View.VISIBLE);
         titleRl.setVisibility(View.VISIBLE);
         titleIcon.setImageResource(R.drawable.classify_selected);
@@ -295,10 +310,18 @@ public class ClassifyFragment extends BaseRVFragment<BookrackPresenter, ClassInd
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         ButterKnife.unbind(headerViewHolder);
         ButterKnife.unbind(this);
+        if (EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 
     @OnClick({R.id.image_serch,})

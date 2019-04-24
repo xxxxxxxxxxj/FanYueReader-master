@@ -28,7 +28,7 @@ public class BookrackAdapter extends RecyclerArrayAdapter<PageHomeBean.PageHomeD
                         R.drawable.cover_default);
                 holder.setText(R.id.tvSubCateTitle, item.getTitle())
                         .setText(R.id.tvSubCateShort, item.getSummary())
-                        .setText(R.id.tvSubCateMsg, item.getAuthor() + " | " + item.getBook_typeid() + " | " + (Integer.parseInt(item.getStatus()) == 1 ? "连载中" : "完结"));
+                        .setText(R.id.tvSubCateMsg, item.getAuthor() + " | " + item.getBook_typename() + " | " + (Integer.parseInt(item.getStatus()) == 1 ? "连载中" : "完结"));
             }
         };
     }

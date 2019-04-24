@@ -61,19 +61,19 @@ public class Recommend extends Base {
         public int chaptersCount;
         public String lastChapter;
         public String recentReadingTime = "";
-        public String book_typeid;
+        public String book_typename;
         public String status;
 
         public RecommendBooks() {
         }
 
-        public RecommendBooks(String _id, String title, String cover, String shortIntro, String author, String book_typeid, String status, boolean isFromSD) {
+        public RecommendBooks(String _id, String title, String cover, String shortIntro, String author, String book_typename, String status, boolean isFromSD) {
             this._id = _id;
             this.title = title;
             this.cover = cover;
             this.shortIntro = shortIntro;
             this.author = author;
-            this.book_typeid = book_typeid;
+            this.book_typename = book_typename;
             this.status = status;
             this.isFromSD = isFromSD;
         }

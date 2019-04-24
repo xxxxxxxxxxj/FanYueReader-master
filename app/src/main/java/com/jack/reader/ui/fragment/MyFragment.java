@@ -22,6 +22,7 @@ import com.jack.reader.base.BaseRVFragment;
 import com.jack.reader.bean.MyIndexBean;
 import com.jack.reader.bean.PageHomeBean;
 import com.jack.reader.bean.Recommend;
+import com.jack.reader.bean.RefershFranmentEvent;
 import com.jack.reader.bean.RefreshMyBookEvent;
 import com.jack.reader.component.AppComponent;
 import com.jack.reader.component.DaggerFindComponent;
@@ -82,7 +83,7 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
     private String current_book_title;
     private String current_book_summary;
     private String current_book_author;
-    private String current_book_book_typeid;
+    private String current_book_book_typename;
     private String current_book_status;
 
     @Override
@@ -93,6 +94,13 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(RefreshMyBookEvent event) {
         if (event != null && event.isRefresh()) {
+            onRefresh();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(RefershFranmentEvent event) {
+        if (event != null && event.getPosition() == 3) {
             onRefresh();
         }
     }
@@ -140,7 +148,6 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override
@@ -206,14 +213,14 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
             current_book_title = spUtil.getString("current_book_title", "");
             current_book_summary = spUtil.getString("current_book_summary", "");
             current_book_author = spUtil.getString("current_book_author", "");
-            current_book_book_typeid = spUtil.getString("current_book_book_typeid", "");
+            current_book_book_typename = spUtil.getString("current_book_book_typename", "");
             current_book_status = spUtil.getString("current_book_status", "");
             tvMyfragType.setText("当前在看的");
             Glide.with(mContext).load(spUtil.getString("current_book_coverimg", "")).placeholder(R.drawable.cover_default).into(ivMyfragBookimg);
             StringUtils.setText(tvMyfragBooktitle, spUtil.getString("current_book_title", ""), "", View.VISIBLE, View.VISIBLE);
             StringUtils.setText(tvMyfragBookdesc, spUtil.getString("current_book_summary", ""), "", View.VISIBLE, View.VISIBLE);
             StringUtils.setText(tvMyfragBookmsg, spUtil.getString("current_book_author", "") + " | " +
-                    spUtil.getString("current_book_book_typeid", "") + " | " + (Integer.parseInt(spUtil.getString("current_book_status", ""))
+                    spUtil.getString("current_book_book_typename", "") + " | " + (Integer.parseInt(spUtil.getString("current_book_status", ""))
                     == 1 ? "连载中" : "完结"), "", View.VISIBLE, View.VISIBLE);
         } else {
             PageHomeBean.PageHomeData.PageHomeBooks recommendBook = data.getRecommendBook();
@@ -223,13 +230,13 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
                 current_book_title = recommendBook.getTitle();
                 current_book_summary = recommendBook.getSummary();
                 current_book_author = recommendBook.getAuthor();
-                current_book_book_typeid = recommendBook.getBook_typeid();
+                current_book_book_typename = recommendBook.getBook_typename();
                 current_book_status = recommendBook.getStatus();
                 tvMyfragType.setText("推荐最新");
                 Glide.with(mContext).load(recommendBook.getCoverimg()).placeholder(R.drawable.cover_default).into(ivMyfragBookimg);
                 StringUtils.setText(tvMyfragBooktitle, recommendBook.getTitle(), "", View.VISIBLE, View.VISIBLE);
                 StringUtils.setText(tvMyfragBookdesc, recommendBook.getSummary(), "", View.VISIBLE, View.VISIBLE);
-                StringUtils.setText(tvMyfragBookmsg, recommendBook.getAuthor() + " | " + recommendBook.getBook_typeid() + " | " + (Integer.parseInt(recommendBook.getStatus()) == 1 ? "连载中" : "完结"), "", View.VISIBLE, View.VISIBLE);
+                StringUtils.setText(tvMyfragBookmsg, recommendBook.getAuthor() + " | " + recommendBook.getBook_typename() + " | " + (Integer.parseInt(recommendBook.getStatus()) == 1 ? "连载中" : "完结"), "", View.VISIBLE, View.VISIBLE);
             }
         }
         if (list != null) {
@@ -272,7 +279,7 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
         ReadActivity.startActivity(mContext,
                 new Recommend.RecommendBooks(mAdapter.getItem(position).getId(), mAdapter.getItem(position).getTitle(),
                         mAdapter.getItem(position).getCoverimg(), mAdapter.getItem(position).getSummary(),
-                        mAdapter.getItem(position).getAuthor(), mAdapter.getItem(position).getBook_typeid(),
+                        mAdapter.getItem(position).getAuthor(), mAdapter.getItem(position).getBook_typename(),
                         mAdapter.getItem(position).getStatus(), false));
     }
 
@@ -290,7 +297,7 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
                 ReadActivity.startActivity(mContext,
                         new Recommend.RecommendBooks(current_book_id, current_book_title,
                                 current_book_coverimg, current_book_summary,
-                                current_book_author, current_book_book_typeid,
+                                current_book_author, current_book_book_typename,
                                 current_book_status, false));
                 break;
         }
@@ -299,6 +306,7 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
     @Override
     public void onDestroy() {
         super.onDestroy();
+        ButterKnife.unbind(this);
         if (EventBus.getDefault().isRegistered(this)) {//加上判断
             EventBus.getDefault().unregister(this);
         }

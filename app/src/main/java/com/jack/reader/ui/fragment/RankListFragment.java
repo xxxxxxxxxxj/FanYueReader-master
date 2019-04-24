@@ -20,6 +20,7 @@ import com.jack.reader.bean.BooksByCats;
 import com.jack.reader.bean.ClassIndexBean;
 import com.jack.reader.bean.PageHomeBean;
 import com.jack.reader.bean.RankListBean;
+import com.jack.reader.bean.RefershFranmentEvent;
 import com.jack.reader.component.AppComponent;
 import com.jack.reader.component.DaggerFindComponent;
 import com.jack.reader.ui.adapter.RankListTypeAdapter;
@@ -27,6 +28,10 @@ import com.jack.reader.ui.contract.BookrackContract;
 import com.jack.reader.ui.presenter.BookrackPresenter;
 import com.jack.reader.utils.AppUtils;
 import com.jack.reader.utils.LogUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -56,8 +61,18 @@ public class RankListFragment extends BaseRVFragment<BookrackPresenter, RankList
     //声明mLocationOption对象
     private AMapLocationClientOption mLocationOption;
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(RefershFranmentEvent event) {
+        if (event != null && event.getPosition() == 2) {
+            onRefresh();
+        }
+    }
+
     @Override
     public void initDatas() {
+        if (!EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().register(this);
+        }
         titleRl.setVisibility(View.VISIBLE);
         titleIcon.setImageResource(R.drawable.toplist_selected);
         titleText.setText("榜单");
@@ -208,6 +223,14 @@ public class RankListFragment extends BaseRVFragment<BookrackPresenter, RankList
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         ButterKnife.unbind(this);
+        if (EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().unregister(this);
+        }
     }
 }

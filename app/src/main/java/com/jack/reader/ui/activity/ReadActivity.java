@@ -294,7 +294,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
         spUtil.saveString("current_book_coverimg", recommendBooks.cover);
         spUtil.saveString("current_book_summary", recommendBooks.shortIntro);
         spUtil.saveString("current_book_author", recommendBooks.author);
-        spUtil.saveString("current_book_book_typeid", recommendBooks.book_typeid);
+        spUtil.saveString("current_book_book_typename", recommendBooks.book_typename);
         spUtil.saveString("current_book_status", recommendBooks.status);
         EventBus.getDefault().post(new RefreshMyBookEvent(true));
         bookId = recommendBooks._id;
@@ -768,19 +768,21 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
                 .setItems(new String[]{"后面五十章", "后面全部", "全部"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(ReadActivity.this, DownloadBookService.class);
                         switch (which) {
                             case 0:
-                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, currentChapter + 50, lat, lng));
+                                intent.putExtra("downloadQueue",new DownloadQueue(bookId, mChapterList, currentChapter + 1, currentChapter + 50, lat, lng));
                                 break;
                             case 1:
-                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, mChapterList.size(), lat, lng));
+                                intent.putExtra("downloadQueue",new DownloadQueue(bookId, mChapterList, currentChapter + 1, mChapterList.size(), lat, lng));
                                 break;
                             case 2:
-                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, 1, mChapterList.size(), lat, lng));
+                                intent.putExtra("downloadQueue",new DownloadQueue(bookId, mChapterList, 1, mChapterList.size(), lat, lng));
                                 break;
                             default:
                                 break;
                         }
+                        startService(intent);
                     }
                 });
         builder.show();

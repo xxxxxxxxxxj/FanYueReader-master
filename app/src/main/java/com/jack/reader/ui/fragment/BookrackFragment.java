@@ -24,6 +24,7 @@ import com.jack.reader.bean.ClassIndexBean;
 import com.jack.reader.bean.PageHomeBean;
 import com.jack.reader.bean.RankListBean;
 import com.jack.reader.bean.Recommend;
+import com.jack.reader.bean.RefershFranmentEvent;
 import com.jack.reader.component.AppComponent;
 import com.jack.reader.component.DaggerFindComponent;
 import com.jack.reader.ui.activity.ReadActivity;
@@ -39,6 +40,10 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +79,18 @@ public class BookrackFragment extends BaseRVFragment<BookrackPresenter, PageHome
     //声明mLocationOption对象
     private AMapLocationClientOption mLocationOption;
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(RefershFranmentEvent event) {
+        if (event != null && event.getPosition() == 0) {
+            onRefresh();
+        }
+    }
+
     @Override
     public void initDatas() {
+        if (!EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().register(this);
+        }
         image_serch.setVisibility(View.VISIBLE);
         titleRl.setVisibility(View.VISIBLE);
         titleIcon.setImageResource(R.drawable.bookrack_selected);
@@ -227,7 +242,7 @@ public class BookrackFragment extends BaseRVFragment<BookrackPresenter, PageHome
         ReadActivity.startActivity(mContext,
                 new Recommend.RecommendBooks(mAdapter.getItem(position).getId(), mAdapter.getItem(position).getTitle(),
                         mAdapter.getItem(position).getCoverimg(), mAdapter.getItem(position).getSummary(),
-                        mAdapter.getItem(position).getAuthor(), mAdapter.getItem(position).getBook_typeid(),
+                        mAdapter.getItem(position).getAuthor(), mAdapter.getItem(position).getBook_typename(),
                         mAdapter.getItem(position).getStatus(), false));
     }
 
@@ -296,8 +311,16 @@ public class BookrackFragment extends BaseRVFragment<BookrackPresenter, PageHome
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         ButterKnife.unbind(headerViewHolder);
         ButterKnife.unbind(this);
+        if (EventBus.getDefault().isRegistered(this)) {//加上判断
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     @OnClick({R.id.image_serch,})
