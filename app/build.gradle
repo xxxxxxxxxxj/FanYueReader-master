@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "com.jack.reader"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 9
+        versionName "9.0"
+        ndk { abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "arm64-v8a", "x86_64" }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('/Users/zhoujunxia/as_workspace/FanYueReader-master/keystore/jacksign.jks')
+            storePassword 'jack123'
+            keyAlias 'jack123'
+            keyPassword 'jack123'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    lintOptions {//处理打包失败
+        checkReleaseBuilds false
+        abortOnError false
+        disable 'MissingTranslation', 'ExtraTranslation'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':EasyAdapterLibrary')
+    // Net
+    // Annotation
+    // Rx
+    // Bus
+    // leakcanary
+    compile project(':bottomtabbar')
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.google.dagger:dagger:2.0.2'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.5'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.commit451:PhotoView:1.2.4'
+    compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
+    compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.amap.api:location:latest.integration'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    apt 'com.google.dagger:dagger-compiler:2.0.2'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    compile 'com.hyman:flowlayout-lib:1.1.2'
+}

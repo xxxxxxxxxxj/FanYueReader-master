@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.jack.reader.ui.activity.SerchBookActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dip"
+        android:padding="10dip">
+
+        <TextView
+            android:id="@+id/tv_serchbook_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="取消"
+            android:textColor="@color/common_h1"
+            android:textSize="14sp" />
+
+        <com.jack.reader.view.ClearEditText
+            android:id="@+id/cet_serchbook"
+            android:layout_width="match_parent"
+            android:layout_height="30dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/tv_serchbook_cancle"
+            android:background="@drawable/bh_serch"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:hint="搜索"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="30dp"
+            android:paddingRight="5dp"
+            android:singleLine="true"
+            android:textColor="@color/common_h1"
+            android:textColorHint="@color/abbbbbb"
+            android:textCursorDrawable="@drawable/editshow"
+            android:textSize="14sp">
+
+        </com.jack.reader.view.ClearEditText>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:text="搜索热词"
+        android:textColor="@color/common_h1"
+        android:textSize="16sp" />
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/tfl_serchbook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:background="@color/white" />
+</LinearLayout>

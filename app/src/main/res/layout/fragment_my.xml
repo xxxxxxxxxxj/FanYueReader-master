@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#13B5FF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_myfrag_top"
+        android:layout_width="263dip"
+        android:layout_height="118dip"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dip"
+        android:background="@drawable/bg_myfrag_mybook"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_myfrag_booknum"
+            android:layout_width="67dip"
+            android:layout_height="67dip"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="15dip"
+            android:background="@drawable/icon_myfrag_booknum"
+            android:gravity="center"
+            android:textColor="@color/common_h1"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的MY"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我收藏的小说"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_myfrag_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="187.5dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_myfrag_bottom"
+        android:orientation="vertical"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip"
+        android:paddingTop="25dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dip"
+                android:layout_height="24dip"
+                android:layout_marginRight="10dip"
+                android:scaleType="fitXY"
+                android:src="@drawable/icon_myfrag_heidian" />
+
+            <TextView
+                android:id="@+id/tv_myfrag_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:textColor="@color/common_h1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOW"
+                android:textColor="@color/common_h1"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_myfrag_bookimg"
+                android:layout_width="70dp"
+                android:layout_height="93dp"
+                android:layout_marginRight="10dip"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cover_default" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_myfrag_booktitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="宦官哈哈"
+                    android:textColor="@color/common_h1"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_myfrag_bookdesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="xxxxxxxxxxxxxxxx"
+                    android:textColor="@color/common_h2"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_myfrag_bookmsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="xxxxxxxxxxxxxxxx"
+                    android:textColor="@color/common_h3"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_myfrag_bottom"
+        android:layout_below="@id/ll_myfrag_top"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip">
+
+        <LinearLayout
+            android:id="@+id/ll_myfrag_books"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.jack.reader.view.recyclerview.EasyRecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dip"
+                app:layout_empty="@layout/common_empty_view"
+                app:layout_progress="@layout/common_progress_view"
+                app:scrollbars="none" />
+
+            <TextView
+                android:id="@+id/tv_myfrag_book_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看更多>"
+                android:textColor="@color/common_h1"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_myfrag_book_nobook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="您还没有收藏小说，去收藏～"
+            android:textColor="@color/common_h1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</RelativeLayout>
