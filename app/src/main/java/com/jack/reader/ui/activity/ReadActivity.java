@@ -395,13 +395,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
                 hideReadBar();
             }
         });
-        mTocListPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                gone(mTvBookReadTocTitle);
-                visible(mTvBookReadReading, mTvBookReadCommunity, mTvBookReadChangeSource);
-            }
-        });
     }
 
     /**
@@ -682,7 +675,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
     public void onClickBack() {
         if (mTocListPopupWindow.isShowing()) {
             mTocListPopupWindow.dismiss();
-        }else{
+        } else {
             finish();
         }
     }
@@ -771,13 +764,13 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
                         Intent intent = new Intent(ReadActivity.this, DownloadBookService.class);
                         switch (which) {
                             case 0:
-                                intent.putExtra("downloadQueue",new DownloadQueue(bookId, mChapterList, currentChapter + 1, currentChapter + 50, lat, lng));
+                                intent.putExtra("downloadQueue", new DownloadQueue(bookId, mChapterList, currentChapter + 1, currentChapter + 50, lat, lng));
                                 break;
                             case 1:
-                                intent.putExtra("downloadQueue",new DownloadQueue(bookId, mChapterList, currentChapter + 1, mChapterList.size(), lat, lng));
+                                intent.putExtra("downloadQueue", new DownloadQueue(bookId, mChapterList, currentChapter + 1, mChapterList.size(), lat, lng));
                                 break;
                             case 2:
-                                intent.putExtra("downloadQueue",new DownloadQueue(bookId, mChapterList, 1, mChapterList.size(), lat, lng));
+                                intent.putExtra("downloadQueue", new DownloadQueue(bookId, mChapterList, 1, mChapterList.size(), lat, lng));
                                 break;
                             default:
                                 break;
@@ -988,11 +981,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                finish();
-                /*if (mTocListPopupWindow != null && mTocListPopupWindow.isShowing()) {
+                if (mTocListPopupWindow != null && mTocListPopupWindow.isShowing()) {
                     mTocListPopupWindow.dismiss();
-                    gone(mTvBookReadTocTitle);
-                    visible(mTvBookReadReading, mTvBookReadCommunity, mTvBookReadChangeSource);
                     return true;
                 } else if (isVisible(rlReadAaSet)) {
                     gone(rlReadAaSet);
@@ -1001,10 +991,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
                     hideReadBar();
                     return true;
                 }
-//                else if (!CollectionsManager.getInstance().isCollected(bookId)) {
-//                    showJoinBookShelfDialog(recommendBooks);
-//                    return true;
-//                }*/
+                finish();
                 break;
             case KeyEvent.KEYCODE_MENU:
                 toggleReadBar();

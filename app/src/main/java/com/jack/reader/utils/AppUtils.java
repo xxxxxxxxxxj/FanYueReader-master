@@ -23,11 +23,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.inputmethod.InputMethodManager;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -145,5 +148,16 @@ public class AppUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static Bitmap decodeBitmapResource(Resources resources, int id) {
+        Bitmap bitmap;
+        InputStream is = resources.openRawResource(id);
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inPurgeable = true;
+        opts.inInputShareable = true;
+        opts.inPreferredConfig = Bitmap.Config.RGB_565;
+        bitmap = BitmapFactory.decodeStream(is, null, opts);
+        return bitmap;
     }
 }

@@ -16,7 +16,6 @@
 package com.jack.reader.manager;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
@@ -79,7 +78,8 @@ public class ThemeManager {
                 bmp.eraseColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.read_theme_green));
                 break;
             case LEATHER:
-                bmp = BitmapFactory.decodeResource(AppUtils.getAppContext().getResources(), R.drawable.theme_leather_bg);
+                bmp = AppUtils.decodeBitmapResource(AppUtils.getAppContext().getResources(), R.drawable.theme_leather_bg);
+                        //BitmapFactory.decodeResource(AppUtils.getAppContext().getResources(), R.drawable.theme_leather_bg);
                 break;
             case GRAY:
                 bmp.eraseColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.read_theme_gray));
