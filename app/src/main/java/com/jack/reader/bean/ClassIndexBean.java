@@ -40,14 +40,14 @@ public class ClassIndexBean {
     }
 
     public static class ClassIndexData {
-        private List<BannerBean.BannerData> banner;
+        private List<BannerBean.BannerData.NewBanner> banner;
         private List<ClassIndexType> retbooktype;
 
-        public List<BannerBean.BannerData> getBanner() {
+        public List<BannerBean.BannerData.NewBanner> getBanner() {
             return banner;
         }
 
-        public void setBanner(List<BannerBean.BannerData> banner) {
+        public void setBanner(List<BannerBean.BannerData.NewBanner> banner) {
             this.banner = banner;
         }
 

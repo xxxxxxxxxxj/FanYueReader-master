@@ -16,7 +16,7 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.bumptech.glide.Glide;
-import com.jack.reader.BookListActivity;
+import com.jack.reader.ui.activity.BookListActivity;
 import com.jack.reader.R;
 import com.jack.reader.base.BaseRVFragment;
 import com.jack.reader.bean.MyIndexBean;
@@ -261,7 +261,7 @@ public class MyFragment extends BaseRVFragment<MyFragMentPresenter, PageHomeBean
 
     @Override
     public void myIndexError(String msg) {
-        LogUtils.d(TAG, "myIndexError Error, msg:" + msg);
+        LogUtils.e(TAG, "myIndexError Error, msg:" + msg);
     }
 
     @Override

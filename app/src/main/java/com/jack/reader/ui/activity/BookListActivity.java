@@ -1,9 +1,10 @@
-package com.jack.reader;
+package com.jack.reader.ui.activity;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.jack.reader.R;
 import com.jack.reader.base.BaseRVActivity;
 import com.jack.reader.bean.PageHomeBean;
 import com.jack.reader.bean.Recommend;
@@ -230,7 +231,7 @@ public class BookListActivity extends BaseRVActivity<PageHomeBean.PageHomeData.P
 
     @Override
     public void bookListError(String msg) {
-        LogUtils.d(TAG, "bookListError Error, msg:" + msg);
+        LogUtils.e(TAG, "bookListError Error, msg:" + msg);
         if (type == 3 || type == 4) {
             if (pn == 1) {
                 mRecyclerView.showEmpty();

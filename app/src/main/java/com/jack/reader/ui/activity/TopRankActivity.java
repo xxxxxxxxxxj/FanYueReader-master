@@ -122,7 +122,7 @@ public class TopRankActivity extends BaseActivity implements TopRankContract.Vie
     }
 
     @Override
-    public void showBannerList(List<BannerBean.BannerData> imageList) {
+    public void showBannerList(List<BannerBean.BannerData.NewBanner> imageList) {
 
     }
 

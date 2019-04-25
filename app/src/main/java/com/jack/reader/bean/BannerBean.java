@@ -9,40 +9,52 @@ import java.util.List;
 public class BannerBean {
     private int errno;
     private String msg;
-    private List<BannerData> data;
+    private BannerData data;
 
     /**
-     *   "url": "com.haotang.book",
-     "target": 1,
-     "img": "http://img.tangseng.shop/other/banner01.jpg"
+     * "url": "com.haotang.book",
+     * "target": 1,
+     * "img": "http://img.tangseng.shop/other/banner01.jpg"
      */
-    public static class BannerData{
-        private  String linkurl;
-        private String imgurl;
-        private int jumptype;
+    public static class BannerData {
+        private List<NewBanner> list;
 
-        public int getType() {
-            return jumptype;
+        public List<NewBanner> getList() {
+            return list;
         }
 
-        public void setType(int type) {
-            this.jumptype = type;
+        public void setList(List<NewBanner> list) {
+            this.list = list;
         }
 
-        public String getLinkurl() {
-            return linkurl;
-        }
+        public static class NewBanner {
+            private String linkurl;
+            private String imgurl;
+            private int jumptype;
 
-        public void setLinkurl(String linkurl) {
-            this.linkurl = linkurl;
-        }
+            public int getType() {
+                return jumptype;
+            }
 
-        public String getImgurl() {
-            return imgurl;
-        }
+            public void setType(int type) {
+                this.jumptype = type;
+            }
 
-        public void setImgurl(String imgurl) {
-            this.imgurl = imgurl;
+            public String getLinkurl() {
+                return linkurl;
+            }
+
+            public void setLinkurl(String linkurl) {
+                this.linkurl = linkurl;
+            }
+
+            public String getImgurl() {
+                return imgurl;
+            }
+
+            public void setImgurl(String imgurl) {
+                this.imgurl = imgurl;
+            }
         }
     }
 
@@ -62,11 +74,11 @@ public class BannerBean {
         this.msg = msg;
     }
 
-    public List<BannerData> getData() {
+    public BannerData getData() {
         return data;
     }
 
-    public void setData(List<BannerData> data) {
+    public void setData(BannerData data) {
         this.data = data;
     }
 }

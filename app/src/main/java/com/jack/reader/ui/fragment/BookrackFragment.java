@@ -147,16 +147,16 @@ public class BookrackFragment extends BaseRVFragment<BookrackPresenter, PageHome
 
     @Override
     public void pagehomeError(String msg) {
-        LogUtils.d(TAG, "pagehomeError Error, msg:" + msg);
+        LogUtils.e(TAG, "pagehomeError Error, msg:" + msg);
     }
 
     @Override
     public void pagehomeSuccess(PageHomeBean.PageHomeData data) {
-        final List<BannerBean.BannerData> banner = data.getBanner();
+        final List<BannerBean.BannerData.NewBanner> banner = data.getBanner();
         List<PageHomeBean.PageHomeData.PageHomeBooks> books = data.getBooks();
         if (banner != null && banner.size() > 0) {
             final List<String> mImages = new ArrayList<>();
-            for (BannerBean.BannerData bean : banner) {
+            for (BannerBean.BannerData.NewBanner bean : banner) {
                 mImages.add(bean.getImgurl());
             }
             headerViewHolder.mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);

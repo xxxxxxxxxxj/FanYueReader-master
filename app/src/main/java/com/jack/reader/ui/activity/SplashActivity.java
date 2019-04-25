@@ -177,11 +177,11 @@ public class SplashActivity extends AppCompatActivity implements TopRankContract
 
     @Override
     public void updatauserinfoSuccess() {
-        LogUtils.d(TAG, "updatauserinfoSuccess");
+        LogUtils.e(TAG, "updatauserinfoSuccess");
     }
 
     @Override
-    public void showBannerList(final List<BannerBean.BannerData> imageList) {
+    public void showBannerList(final List<BannerBean.BannerData.NewBanner> imageList) {
         if (imageList != null && imageList.size() > 0) {
             Glide.with(this).load(imageList.get(0).getImgurl()).into(imageBg);
             imageBg.setOnClickListener(new View.OnClickListener() {
@@ -215,12 +215,12 @@ public class SplashActivity extends AppCompatActivity implements TopRankContract
 
     @Override
     public void updatauserinfoError(String msg) {
-        LogUtils.d(TAG, "updatauserinfoError Error, msg:" + msg);
+        LogUtils.e(TAG, "updatauserinfoError Error, msg:" + msg);
     }
 
     @Override
     public void showBannerListError(String msg) {
-        LogUtils.d(TAG, "showBannerListError Error, msg:" + msg);
+        LogUtils.e(TAG, "showBannerListError Error, msg:" + msg);
         goHome();
     }
 

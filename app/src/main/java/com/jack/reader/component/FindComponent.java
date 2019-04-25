@@ -15,7 +15,7 @@
  */
 package com.jack.reader.component;
 
-import com.jack.reader.BookListActivity;
+import com.jack.reader.ui.activity.BookListActivity;
 import com.jack.reader.ui.activity.SerchBookActivity;
 import com.jack.reader.ui.activity.SplashActivity;
 import com.jack.reader.ui.activity.SubCategoryListActivity;

@@ -25,8 +25,6 @@ import com.jack.reader.utils.LogUtils;
 import com.jack.reader.utils.RxUtil;
 import com.jack.reader.utils.StringUtils;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import okhttp3.RequestBody;
@@ -92,25 +90,30 @@ public class TopRankPresenter extends RxPresenter<TopRankContract.View> implemen
 
                     @Override
                     public void onError(Throwable e) {
-                        LogUtils.e("getRankList:" + e.toString());
+                        LogUtils.e("getBannerList:" + e.toString());
                         mView.showBannerListError(e.toString());
                     }
 
                     @Override
                     public void onNext(BannerBean bannerBean) {
-                        if(bannerBean != null){
-                            List<BannerBean.BannerData> data = bannerBean.getData();
+                        if (bannerBean != null) {
+                            BannerBean.BannerData data = bannerBean.getData();
                             int errno = bannerBean.getErrno();
-                            if(errno == 0){
-                                if(data!=null&&data.size()>0){
-                                    mView.showBannerList(bannerBean.getData());
-                                }else{
-                                    mView.showBannerListError("集合为空");
+                            if (errno == 0) {
+                                if (data != null) {
+                                    if (data.getList() != null && data.getList().size() > 0) {
+                                        mView.showBannerList(data.getList());
+                                    } else {
+                                        mView.showBannerListError("集合为空");
+                                    }
+                                } else {
+                                    mView.showBannerListError("data为空");
                                 }
-                            }else{
+
+                            } else {
                                 mView.showBannerListError(bannerBean.getMsg());
                             }
-                        }else{
+                        } else {
                             mView.showBannerListError("bannerBean为空");
                         }
                     }

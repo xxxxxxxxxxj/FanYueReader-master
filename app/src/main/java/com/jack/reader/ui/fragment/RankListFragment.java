@@ -13,7 +13,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.jack.reader.BookListActivity;
+import com.jack.reader.ui.activity.BookListActivity;
 import com.jack.reader.R;
 import com.jack.reader.base.BaseRVFragment;
 import com.jack.reader.bean.BooksByCats;
@@ -134,7 +134,7 @@ public class RankListFragment extends BaseRVFragment<BookrackPresenter, RankList
 
     @Override
     public void rankListError(String msg) {
-        LogUtils.d(TAG, "rankListError Error, msg:" + msg);
+        LogUtils.e(TAG, "rankListError Error, msg:" + msg);
     }
 
     @Override

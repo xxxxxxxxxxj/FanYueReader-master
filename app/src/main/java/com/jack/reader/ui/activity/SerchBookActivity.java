@@ -11,7 +11,6 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.jack.reader.BookListActivity;
 import com.jack.reader.R;
 import com.jack.reader.base.BaseActivity;
 import com.jack.reader.bean.KeywordListBean;
@@ -188,7 +187,7 @@ public class SerchBookActivity extends BaseActivity implements SerchBookContract
 
     @Override
     public void keywordError(String msg) {
-        LogUtils.d(TAG, "keywordError Error, msg:" + msg);
+        LogUtils.e(TAG, "keywordError Error, msg:" + msg);
     }
 
     @Override

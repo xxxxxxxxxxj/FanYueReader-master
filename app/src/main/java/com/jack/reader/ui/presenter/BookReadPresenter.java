@@ -173,14 +173,19 @@ public class BookReadPresenter extends RxPresenter<BookReadContract.View>
                     @Override
                     public void onNext(BannerBean bannerBean) {
                         if (bannerBean != null) {
-                            List<BannerBean.BannerData> data = bannerBean.getData();
+                            BannerBean.BannerData data = bannerBean.getData();
                             int errno = bannerBean.getErrno();
                             if (errno == 0) {
-                                if (data != null && data.size() > 0) {
-                                    mView.showBannerList(bannerBean.getData());
+                                if (data != null) {
+                                    if (data.getList() != null && data.getList().size() > 0) {
+                                        mView.showBannerList(data.getList());
+                                    } else {
+                                        mView.showBannerListError("集合为空");
+                                    }
                                 } else {
-                                    mView.showBannerListError("集合为空");
+                                    mView.showBannerListError("data为空");
                                 }
+
                             } else {
                                 mView.showBannerListError(bannerBean.getMsg());
                             }

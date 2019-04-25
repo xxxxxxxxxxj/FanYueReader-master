@@ -540,15 +540,15 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
     @Override
     public void showBannerListError(String msg) {
         rlBottom.setVisibility(View.GONE);
-        LogUtils.d(TAG, "showBannerListError Error, msg:" + msg);
+        LogUtils.e(TAG, "showBannerListError Error, msg:" + msg);
     }
 
     @Override
-    public void showBannerList(final List<BannerBean.BannerData> imageList) {
+    public void showBannerList(final List<BannerBean.BannerData.NewBanner> imageList) {
         rlBottom.setVisibility(View.VISIBLE);
         Log.i("BookrackFragment", "=====showBannerList");
         List<String> mImages = new ArrayList<>();
-        for (BannerBean.BannerData bean : imageList) {
+        for (BannerBean.BannerData.NewBanner bean : imageList) {
             mImages.add(bean.getImgurl());
         }
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
@@ -596,7 +596,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
 
     @Override
     public void countreadError(String msg) {
-        LogUtils.d(TAG, "countreadError Error, msg:" + msg);
+        LogUtils.e(TAG, "countreadError Error, msg:" + msg);
     }
 
     @Override
@@ -606,7 +606,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
 
     @Override
     public void updatamybookError(String msg) {
-        LogUtils.d(TAG, "updatamybookError Error, msg:" + msg);
+        LogUtils.e(TAG, "updatamybookError Error, msg:" + msg);
     }
 
     @Override

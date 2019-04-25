@@ -37,7 +37,7 @@ public interface BookReadContract {
 
         void showBannerListError(String msg);
 
-        void showBannerList(List<BannerBean.BannerData> imageList);
+        void showBannerList(List<BannerBean.BannerData.NewBanner> imageList);
 
         void countreadError(String msg);
 

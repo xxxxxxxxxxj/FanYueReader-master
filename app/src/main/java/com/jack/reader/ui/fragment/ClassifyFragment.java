@@ -16,7 +16,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.jack.reader.BookListActivity;
+import com.jack.reader.ui.activity.BookListActivity;
 import com.jack.reader.R;
 import com.jack.reader.base.BaseRVFragment;
 import com.jack.reader.bean.BannerBean;
@@ -156,16 +156,16 @@ public class ClassifyFragment extends BaseRVFragment<BookrackPresenter, ClassInd
 
     @Override
     public void classIndexError(String msg) {
-        LogUtils.d(TAG, "classIndexError Error, msg:" + msg);
+        LogUtils.e(TAG, "classIndexError Error, msg:" + msg);
     }
 
     @Override
     public void classIndexSuccess(ClassIndexBean.ClassIndexData data) {
-        final List<BannerBean.BannerData> banner = data.getBanner();
+        final List<BannerBean.BannerData.NewBanner> banner = data.getBanner();
         List<ClassIndexBean.ClassIndexData.ClassIndexType> retbooktype = data.getRetbooktype();
         if (banner != null && banner.size() > 0) {
             final List<String> mImages = new ArrayList<>();
-            for (BannerBean.BannerData bean : banner) {
+            for (BannerBean.BannerData.NewBanner bean : banner) {
                 mImages.add(bean.getImgurl());
             }
             headerViewHolder.mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);

@@ -34,7 +34,7 @@ public interface TopRankContract {
         void updatauserinfoSuccess();
         void updatauserinfoError(String msg);
         void showBannerListError(String msg);
-        void showBannerList(List<BannerBean.BannerData> imageList);
+        void showBannerList(List<BannerBean.BannerData.NewBanner> imageList);
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
