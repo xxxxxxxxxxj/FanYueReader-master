@@ -1031,7 +1031,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        mPageWidget.recycle();
         if (mTtsPlayer.getPlayerState() == TTSCommonPlayer.PLAYER_STATE_PLAYING)
             mTtsPlayer.stop();
 

@@ -367,4 +367,8 @@ public abstract class BaseReadView extends View {
             LogUtils.d("mNextPageBitmap recycle");
         }
     }
+
+    public void recycle() {
+        pagefactory.recycle();
+    }
 }

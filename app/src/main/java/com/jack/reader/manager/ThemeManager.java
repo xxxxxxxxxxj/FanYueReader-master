@@ -66,7 +66,7 @@ public class ThemeManager {
     }
 
     public static Bitmap getThemeDrawable(int theme) {
-        Bitmap bmp = Bitmap.createBitmap(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bmp = Bitmap.createBitmap(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(), Bitmap.Config.RGB_565);
         switch (theme) {
             case NORMAL:
                 bmp.eraseColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.read_theme_white));
