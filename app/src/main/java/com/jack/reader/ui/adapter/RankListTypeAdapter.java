@@ -34,6 +34,7 @@ public class RankListTypeAdapter extends RecyclerArrayAdapter<RankListBean.RankL
                 ChangeTextViewSpace tv_item_ranklist = holder.getView(R.id.tv_item_ranklist);
                 tv_item_ranklist.setSpacing(20);
                 StringUtils.setText(tv_item_ranklist, item.getTitle(), "", View.VISIBLE, View.VISIBLE);
+                tv_item_ranklist.setVisibility(View.GONE);
                 holder.setImageUrl(R.id.iv_item_ranklist, item.getImgurl(),
                         R.drawable.cover_default);
             }

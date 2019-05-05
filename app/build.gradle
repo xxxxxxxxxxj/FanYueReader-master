@@ -10,8 +10,8 @@ android {
         applicationId "com.jack.reader"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 9
-        versionName "9.0"
+        versionCode 10
+        versionName "10.0"
         ndk { abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "arm64-v8a", "x86_64" }
     }
 
